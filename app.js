@@ -12,6 +12,7 @@ const NORMAL_COLORS = ['blue', 'yellow', 'red', 'black', 'white']
 const btnChange = document.getElementById('btn_change') 
 const btnHex = document.getElementById('hexadecimal')
 const btnSimple = document.getElementById('simple_color')
+const colorText = document.getElementById('color_text')
 
 //option default
 localStorage.setItem('option', 'hex')
@@ -58,10 +59,7 @@ const getColorRGB = () => {
     return copyOBJ
 }
 
-
-
 btnChange.addEventListener('click', (e) => {
-
 
     const number = getRandomInt(0, 2)
     const ramdonEjecution = [getColorNormal, getColorRGB]
@@ -69,17 +67,16 @@ btnChange.addEventListener('click', (e) => {
     localStorage.setItem('hex', generateRamdonHEX() )
     localStorage.setItem('simple', JSON.stringify( ramdonEjecution[number]() ) )
 
-    /**
-     */
-    
     if (localStorage.getItem('option') === 'hex') {
         
         if (localStorage.getItem('hex') !== null) {
             main.style.backgroundColor = localStorage.getItem('hex')
+            localStorage.setItem('current', localStorage.getItem('hex'))
+            colorText.textContent = localStorage.getItem('current')
         }
 
     }
-    
+
     if (localStorage.getItem('option') === 'simple') {
 
         if (localStorage.getItem('simple') !== null) {
@@ -89,7 +86,8 @@ btnChange.addEventListener('click', (e) => {
                 : getData 
             console.log(result)
             main.style.backgroundColor = result
-    
+            localStorage.setItem('current', result)
+            colorText.textContent = localStorage.getItem('current')
         }
     }
 
@@ -118,4 +116,5 @@ btnSimple.addEventListener('click', e => {
     localStorage.setItem('option', 'simple')
 })
 
-
+main.style.backgroundColor = localStorage.getItem('current')
+colorText.textContent = localStorage.getItem('current')
