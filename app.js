@@ -1,0 +1,36 @@
+const HEX_NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const HEX_ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F']
+const RGB = {
+    red: 0,
+    green: 0,
+    blue: 0
+}
+const btnChange = document.getElementById('btn_change') 
+
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+const generateRamdonHEX = () => {
+
+    const arrHex = HEX_NUMBERS.concat(HEX_ALPHABET)
+    const arrColorHexValue = []
+
+    for (let i = 0; i < 6; i++) {
+        const number = getRandomInt(16, 1)
+        console.log(number)
+
+        arrColorHexValue.push( arrHex[number] )
+
+    }
+
+    console.log(arrColorHexValue)
+
+    return '#' + arrColorHexValue.join("")
+    
+}
+
+btnChange.addEventListener('click', (e) => {
+    console.log(generateRamdonHEX())
+})
