@@ -40,12 +40,22 @@ const getColorNormal = () => {
     return color
 }
 
+const getColorRGB = () => {
+    
+    const copyOBJ = JSON.parse( JSON.stringify(RGB) )
+
+    for(let key in RGB) {
+        const number = getRandomInt(0, 255)
+        RGB[key] = number 
+    }
+    
+    return copyOBJ
+}
 
 btnChange.addEventListener('click', (e) => {
     
     console.log(generateRamdonHEX())
     console.log(getColorNormal())
-    
-
+    console.log(getColorRGB())
 
 })
