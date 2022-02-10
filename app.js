@@ -5,6 +5,9 @@ const RGB = {
     green: 0,
     blue: 0
 }
+const NORMAL_COLORS = ['blue', 'yellow', 'red', 'black', 'white']
+
+
 const btnChange = document.getElementById('btn_change') 
 
 
@@ -12,15 +15,15 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+
 const generateRamdonHEX = () => {
 
     const arrHex = HEX_NUMBERS.concat(HEX_ALPHABET)
     const arrColorHexValue = []
 
     for (let i = 0; i < 6; i++) {
-        const number = getRandomInt(16, 1)
-        console.log(number)
 
+        const number = getRandomInt(0, 16)
         arrColorHexValue.push( arrHex[number] )
 
     }
@@ -31,6 +34,18 @@ const generateRamdonHEX = () => {
     
 }
 
+const getColorNormal = () => {
+    const numberRamdon = getRandomInt(0, 5)
+    const color = NORMAL_COLORS[numberRamdon]
+    return color
+}
+
+
 btnChange.addEventListener('click', (e) => {
+    
     console.log(generateRamdonHEX())
+    console.log(getColorNormal())
+    
+
+
 })
