@@ -10,6 +10,11 @@ const NORMAL_COLORS = ['blue', 'yellow', 'red', 'black', 'white']
 
 
 const btnChange = document.getElementById('btn_change') 
+const btnHex = document.getElementById('hexadecimal')
+const btnSimple = document.getElementById('simple_color')
+
+//option default
+localStorage.setItem('option', 'hex')
 
 
 function getRandomInt(min, max) {
@@ -53,7 +58,10 @@ const getColorRGB = () => {
     return copyOBJ
 }
 
+
+
 btnChange.addEventListener('click', (e) => {
+
 
     const number = getRandomInt(0, 2)
     const ramdonEjecution = [getColorNormal, getColorRGB]
@@ -62,21 +70,52 @@ btnChange.addEventListener('click', (e) => {
     localStorage.setItem('simple', JSON.stringify( ramdonEjecution[number]() ) )
 
     /**
-     * if (localStorage.getItem('hex') !== null) {
-        main.style.backgroundColor = localStorage.getItem('hex')
-        }
      */
+    
+    if (localStorage.getItem('option') === 'hex') {
+        
+        if (localStorage.getItem('hex') !== null) {
+            main.style.backgroundColor = localStorage.getItem('hex')
+        }
 
-    if (localStorage.getItem('simple') !== null) {
-        const getData= JSON.parse( localStorage.getItem('simple') )
-        const result =  typeof getData === 'object'
-            ? `rgb(${getData.red}, ${getData.green}, ${getData.blue})`
-            : getData 
-        console.log(result)
-        main.style.backgroundColor = result
+    }
+    
+    if (localStorage.getItem('option') === 'simple') {
 
+        if (localStorage.getItem('simple') !== null) {
+            const getData= JSON.parse( localStorage.getItem('simple') )
+            const result =  typeof getData === 'object'
+                ? `rgb(${getData.red}, ${getData.green}, ${getData.blue})`
+                : getData 
+            console.log(result)
+            main.style.backgroundColor = result
+    
+        }
     }
 
 
-
 })
+
+btnHex.addEventListener( 'click', e => {
+    btnHex.style.backgroundColor = 'black'
+    btnHex.style.color = 'white'
+
+    btnSimple.style.backgroundColor = "rgb(239, 239, 239)"
+    btnSimple.style.color = "black"
+
+
+    localStorage.setItem('option', 'hex')
+})
+
+btnSimple.addEventListener('click', e => {
+
+    btnHex.style.backgroundColor = 'rgb(239, 239, 239)'
+    btnHex.style.color = 'black'
+
+    btnSimple.style.backgroundColor = 'black' 
+    btnSimple.style.color = 'white'
+
+    localStorage.setItem('option', 'simple')
+})
+
+
